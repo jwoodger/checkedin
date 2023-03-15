@@ -1,5 +1,7 @@
 package checkedin
 
+import "fmt"
+
 func panicOnFalse(pred bool, message string) {
 	if !pred {
 		panic(message)
@@ -21,8 +23,18 @@ func Requires(condition bool) {
 	panicOnFalse(condition, "Precondition error.")
 }
 
+// RequiresMsg works like Requires, but takes a custom message.
+func RequiresMsg(condition bool, message string) {
+	panicOnFalse(condition, fmt.Sprintf("Precondition error: %s.", message))
+}
+
 // Ensures checks a postcondition in the code and then panics if the condition
 // is not met.
 func Ensures(condition bool) {
 	panicOnFalse(condition, "Postcondition error.")
+}
+
+// EnsuresMsg works like Ensures, but takes a custom message.
+func EnsuresMsg(condition bool, message string) {
+	panicOnFalse(condition, fmt.Sprintf("Postcondition error: %s.", message))
 }
