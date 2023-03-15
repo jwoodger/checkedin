@@ -30,3 +30,23 @@ func TestCheckShouldPanic(t *testing.T) {
 func TestCheckDoesNotPanic(t *testing.T) {
 	_ = ci.Check(1, nil)
 }
+
+func TestRequiresShouldPanic(t *testing.T) {
+	shouldPanic(t, func() {
+		ci.Requires(2+2 == 5)
+	})
+}
+
+func TestRequiresDoesNotPanic(t *testing.T) {
+	ci.Ensures(1+1 == 2)
+}
+
+func TestEnsuresShouldPanic(t *testing.T) {
+	shouldPanic(t, func() {
+		ci.Requires(2+2 == 5)
+	})
+}
+
+func TestEnsuresDoesNotPanic(t *testing.T) {
+	ci.Ensures(1+1 == 2)
+}
